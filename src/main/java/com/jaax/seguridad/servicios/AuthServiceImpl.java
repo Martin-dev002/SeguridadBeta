@@ -25,9 +25,9 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public AuthResponse register(RegisterRequest request) {
         var usuario = Usuario.builder()
+                .email(request.getEmail())
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
-                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .rol(Rol.USER)
                 .build();

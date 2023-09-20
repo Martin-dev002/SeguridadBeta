@@ -29,7 +29,7 @@ public class JwtServicio {
         return Jwts.builder().setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 *60*24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -48,7 +48,7 @@ public class JwtServicio {
                 .parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
-                .parseClaimsJwt(tkn)
+                .parseClaimsJws(tkn)
                 .getBody();
     }//utiliza la clase Jwts, toma la secret key la decodifica en base 64 y crea una firma nueva
     private Key getSignInKey(){
